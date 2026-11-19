@@ -19,7 +19,7 @@ Repositorio centralizado dedicado al desarrollo diario de aplicaciones y ejercic
 Aunque cada ejercicio tiene su propia temática, la mayoría sigue esta organización interna:
 
 * `model/` — Entidades principales, clases padre e hijas.
-* `dao/` — Clases encargadas de guardar y cargar la información en archivos JSON.
+* `dao/` — Clases encargadas de guardar y cargar la información en archivos JSON. (Edit: Actualmente trabajo con Oracle sql/Docker ya que la materia lo requiere.)
 * `manager/` — Lógica de negocio, validaciones y administración de listas/colecciones.
 * `controller/` — Intermediario entre la interfaz gráfica y la lógica del programa.
 * `view/` — Componentes visuales de JavaFX con sus respectivos métodos de acceso (*getters* y *setters*).
