@@ -76,12 +76,16 @@ public class InmoviliariaVista extends HBox {
         TableColumn<Propiedad, Integer> colMetros2 = new TableColumn<>("METROS2");
         TableColumn<Propiedad, String> colDireccion = new TableColumn<>("DIRECCION");
         TableColumn<Propiedad, String> colTipo = new TableColumn<>("TIPO DE PROPIEDAD");
+        TableColumn<Propiedad, String> colDetalle = new TableColumn<>("DETALLE");
+        TableColumn<Propiedad, String> colPago = new TableColumn<>("PAGO MENSUAL");
 
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colArriendo.setCellValueFactory(new PropertyValueFactory<>("arriendo"));
         colMetros2.setCellValueFactory(new PropertyValueFactory<>("metrosCuadrados"));
         colDireccion.setCellValueFactory(new PropertyValueFactory<>("direccion"));
         colTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
+        colDetalle.setCellValueFactory(new PropertyValueFactory<>("detalle"));
+        colPago.setCellValueFactory(new PropertyValueFactory<>("pagoTotal"));
 
         TableColumn<Casa, Integer> colCantidadPisos = new TableColumn<>("CANTIDAD DE PISOS");
         TableColumn<Casa, Boolean> colTienePatio = new TableColumn<>("TIENE PATIO");
@@ -95,7 +99,7 @@ public class InmoviliariaVista extends HBox {
         colNumeroPiso.setCellValueFactory(new PropertyValueFactory<>("numeroDePiso"));
         colGastosComunes.setCellValueFactory(new PropertyValueFactory<>("gastosComunes"));
 
-        tvPropiedades.getColumns().addAll(colId,colTipo,colDireccion,colMetros2,colArriendo);
+        tvPropiedades.getColumns().addAll(colId,colTipo,colDireccion,colMetros2,colArriendo, colDetalle, colPago);
         tvCasa.getColumns().addAll(colCantidadPisos, colTienePatio);
         tvDepartamento.getColumns().addAll(colNumeroPiso, colGastosComunes);
 

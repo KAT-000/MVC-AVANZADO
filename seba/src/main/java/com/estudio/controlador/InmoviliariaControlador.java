@@ -1,5 +1,6 @@
 package com.estudio.controlador;
 
+
 import com.estudio.manager.InmoviliariaManager;
 import com.estudio.modelo.Casa;
 import com.estudio.modelo.Departamento;
@@ -9,6 +10,7 @@ import com.estudio.vista.InmoviliariaVista;
 import javafx.collections.FXCollections;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+
 
 public class InmoviliariaControlador {
 
@@ -23,6 +25,13 @@ public class InmoviliariaControlador {
         vista.getBtnEliminar().setOnAction(e -> eliminar());
         vista.getBtnActualizar().setOnAction(e -> actualizar());
         vista.getBtnLimpiar().setOnAction(e -> limpiar());
+        vista.getCmbTipo().setOnAction(e -> alternar());
+
+        vista.getTvPropiedades().getSelectionModel().selectedItemProperty().addListener((obs, vieja, nueva) -> {
+            if (nueva != null){
+                cargarFormulario(nueva);
+            }
+        });
         refrescarTablas();
     }
 
@@ -109,6 +118,37 @@ public class InmoviliariaControlador {
         alerta.setHeaderText(null);
         alerta.setContentText(mensaje);
         alerta.showAndWait();
+    }
+
+    private void alternar(){
+        boolean esCasa = "CASA".equalsIgnoreCase(vista.getCmbTipo().getValue());
+        vista.getTxtTienePatio().setDisable(!esCasa);
+        vista.getTxtCantidadPisos().setDisable(!esCasa);
+        vista.getTxtNumeroDePiso().setDisable(esCasa);
+        vista.getTxtGastosComunes().setDisable(esCasa);
+    }
+    private void cargarFormulario(Propiedad nueva){
+        vista.getCmbTipo().setValue(nueva.getTipo());
+        alternar();
+
+        vista.getTxtDireccion().setText(nueva.getDireccion());
+        vista.getTxtArriendo().setText(String.valueOf(nueva.getArriendo()));
+        vista.getTxtMetros2().setText(String.valueOf(nueva.getMetrosCuadrados()));
+
+        if (nueva instanceof Casa){
+            Casa casa = (Casa) nueva;
+            vista.getTxtCantidadPisos().setText(String.valueOf(casa.getCantidadDePisos()));
+            vista.getTxtTienePatio().setText(String.valueOf(casa.isTienePatio() ? "SI" : "NO"));
+            vista.getTxtNumeroDePiso().clear();
+            vista.getTxtGastosComunes().clear();
+        }
+        if (nueva instanceof Departamento){
+            Departamento departamento = (Departamento) nueva;
+            vista.getTxtNumeroDePiso().setText(String.valueOf(departamento.getNumeroDePiso()));
+            vista.getTxtGastosComunes().setText(String.valueOf(departamento.getGastosComunes()));
+            vista.getTxtCantidadPisos().clear();
+            vista.getTxtTienePatio().clear();
+        }
     }
     
 }
